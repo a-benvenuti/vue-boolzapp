@@ -16,6 +16,7 @@ body{
   justify-content: center;
   align-items: center;
   z-index: 0;
+  overflow-y: hidden;
 }
 /* ----------------------------------------Mix---------------------------------------- */
 a{text-decoration: none;}
@@ -96,7 +97,7 @@ p{line-height: 18px; color: #666; font-weight: 300;}
   padding: 30px 50px;
 }
 .conversazione__sent,
-.conversazione__received{width: 100%;}
+.conversazione__received{width: 100%; margin-top: 12px;}
 .conversazione__sent{justify-content: flex-end;}
 .conversazione__received{justify-content: flex-start;}
 .conversazione__sent p{background-color: #D5F9BA; border-radius: 5px; padding: 15px; width: 40%;}
