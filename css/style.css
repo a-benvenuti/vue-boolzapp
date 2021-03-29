@@ -11,7 +11,7 @@ body{
   width: 100%;
   height: 100vh;
   padding: 20px;
-  background: linear-gradient(to bottom, #009688 20%, #DBDBD2 0);
+  background: linear-gradient(to bottom, #009688 150px, #DBDBD2 0);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,16 +22,14 @@ body{
 a{text-decoration: none;}
 i{font-size: 20px; color: #B1B1B1; cursor: pointer}
 h1, h2, h3, h4, h5, h6, p{color: black;}
-p{line-height: 18px; color: #666; font-weight: 300;}
+p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
 .normal-text{font-size: 20px;}
 .small-text{font-size: 12px; font-weight: bold;}
 .xsmall-text{font-size: 10px; font-weight: bold;}
-/* ----btn---- */
-/* ----/btn---- */
 /* ---------------------------------------/Mix---------------------------------------- */
 /* --------------------------------------BoolZapp------------------------------------- */
 /* ----------GRID-------- */
-.grid{display: flex; width: 1350px; height: 650px; padding: 0 20px; margin: 0 auto; z-index: 1;}
+.grid{display: flex; max-width: 1350px; height: 650px; padding: 0 20px; margin: 0 auto; z-index: 1;}
 .grid .col-user{width: 35%; border-right: 2px solid grey;}
 .grid .col-chat{width: 65%;}
 /* ----------/GRID-------- */
@@ -120,3 +118,27 @@ p{line-height: 18px; color: #666; font-weight: 300;}
 .dib{display: inline-block;}
 .overflow-effect{overflow:auto;}
 /* ----/helpers----*/
+/* ---------------------------------RESPONSIVE asseX------------------------------------- */
+@media (max-width:1028px) {
+  p{font-size: 12px;}
+  .user__notifiche .notifiche__link,
+  .user__notifiche i,
+  .user__ricerca span{display: none;}
+  .user__io .user__box2,
+  .chat__contatto .contatto__box2{flex-direction: column; justify-content: space-between;}
+  .user__box2 i,
+  .contatto__box2 i{font-size: 14px;}
+  .user__io{height: 110px;}
+  .user__notifiche,
+  .user__ricerca{height: 0px; padding: 0;}
+  .user__contatti{height: calc(100% - 110px);}
+}
+@media (max-width:692px) {
+  .user__io h4,
+  .user__contatti h4,
+  .fa-smile{display: none;}
+  .conversazione__sent p,
+  .conversazione__received p{width: 70%; padding: 1px 2px;;}
+  .chat__new input{flex-basis: 90%;}
+}
+/* ---------------------------------/RESPONSIVE asseX------------------------------------- */
