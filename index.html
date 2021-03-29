@@ -53,11 +53,11 @@
               <input class="small-text" type="text" placeholder="Cerca o inizia una nuova chat">
             </span>
           </div>
-          <ul class="user__contatti">
-            <li class="contatti__contatto df">
-              <img src="img/avatar_1.jpg" alt="contact7">
+          <ul class="user__contatti" v-if="contatti.length > 0">
+            <li class="contatti__contatto df" v-for="(item, i) in contatti">
+              <img src="img/avatar{{item.avatar}}.jpg" alt="contact">
               <div>
-                <h4 class="">Michele</h4>
+                <h4 class="">{{item.name}}</h4>
               </div>
             </li>
           </ul>
