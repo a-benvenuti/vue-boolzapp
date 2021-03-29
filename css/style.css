@@ -19,7 +19,7 @@ body{
 }
 /* ----------------------------------------Mix---------------------------------------- */
 a{text-decoration: none;}
-i{font-size: 20px; color: #B1B1B1;}
+i{font-size: 20px; color: #B1B1B1; cursor: pointer}
 h1, h2, h3, h4, h5, h6, p{color: black;}
 p{line-height: 18px; color: #666; font-weight: 300;}
 .normal-text{font-size: 20px;}
@@ -69,9 +69,10 @@ p{line-height: 18px; color: #666; font-weight: 300;}
 
 .user__contatti{
   height: calc(100% - 200px);
-  padding: 20px;
   background-color: white;
 }
+.contatti__contatto{border-bottom: 1px solid #EAEAEA; padding: 10px;}
+.contatti__contatto img{height: 60px; width: auto; border-radius: 100%; margin-right: 15px;}
 /* -------------------/USER------------------- */
 
 /* -------------------CHAT------------------- */
