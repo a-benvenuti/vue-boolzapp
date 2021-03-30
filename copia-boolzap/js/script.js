@@ -116,15 +116,15 @@ var app = new Vue(
           }
       ],
       currentContact: 0,  //index contatto
-      messageText: "",    //campo vuoto messaggio
+      messageText: "",    //campo messaggio
     },
     methods: {
-      // funzione per impostare l'index del contatto cliccato
+      // funzione per 'catturare' l'index del contatto cliccato
       setIndexContact: function(position) {
         this.currentContact = position;
         return this.currentContact;
       },
-      // funzione che inserisci messaggio scritto nell'array e da la risposta
+      // funzione invio messaggio e risposta
       newMessage: function(contact) {
         const newSentMessage = {
           date: '10/01/2020 15:50:00',
