@@ -1,0 +1,140 @@
+/* Reset */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* /Reset */
+body{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  background: linear-gradient(to bottom, #009688 150px, #DBDBD2 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+}
+/* ----------------------------------------Mix---------------------------------------- */
+a{text-decoration: none;}
+i{font-size: 20px; color: #B1B1B1; cursor: pointer}
+h1, h2, h3, h4, h5, h6, p{color: black;}
+p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
+.normal-text{font-size: 20px;}
+.small-text{font-size: 12px; font-weight: bold;}
+.xsmall-text{font-size: 10px; font-weight: bold;}
+.user-avatar{cursor: pointer;}
+/* ---------------------------------------/Mix---------------------------------------- */
+/* --------------------------------------BoolZapp------------------------------------- */
+/* ----------GRID-------- */
+.grid{display: flex; width: 100vw; height: 100vh; padding: 20px 50px; margin: 0 auto;}
+.grid .col-user{width: 35%; border-right: 2px solid grey;}
+.grid .col-chat{width: 65%;}
+/* ----------/GRID-------- */
+.col-user,
+.col-chat{height: 100%;}
+/* -------------------USER------------------- */
+.user__io{
+  height: 80px;
+  padding: 10px;
+  background-color: #EAEAEA;
+  justify-content: space-between;
+}
+.user__box1,
+.user__box2{align-items: center;}
+.user__box1 img{height: 60px; width: auto; border-radius: 100%; margin-right: 15px;}
+.user__box2 i{margin-left: 15px;}
+
+.user__notifiche{
+  height: 80px;
+  padding: 20px;
+  background-color: #8EDAFC;
+  align-items: center;
+}
+.user__notifiche i{font-size: 30px; background: white; color: #8EDAFC; padding: 15px 12px; border-radius: 100%; margin-right: 15px;}
+
+.user__ricerca{
+  height: 40px;
+  padding: 10px;
+  background-color: #F3EEEA;
+  align-items: center;
+}
+.user__ricerca span{width: 100%; align-items: center; background-color: white; border-radius: 5px;}
+.user__ricerca span i{flex-basis: 10%; justify-content: center; font-size: 14px; border-right: 1px solid #EAEAEA;}
+.user__ricerca span input{flex-basis: 90%; line-height: 25px; padding: 0 20px; border: none; border-radius: 5px;}
+
+.user__contatti{
+  height: calc(100% - 200px);
+  background-color: white;
+}
+.contatti__contatto{border-bottom: 1px solid #EAEAEA; padding: 10px;}
+.contatti__contatto img{height: 60px; width: auto; border-radius: 100%; margin-right: 15px;}
+/* -------------------/USER------------------- */
+
+/* -------------------CHAT------------------- */
+.chat__contatto{
+  height: 80px;
+  padding: 10px;
+  background-color: #EAEAEA;
+  justify-content: space-between;
+}
+.contatto__box1,
+.contatto__box2{align-items: center;}
+.contatto__box1 img{height: 60px; width: auto; border-radius: 100%; margin-right: 15px;}
+.contatto__box2 i{margin-left: 15px;}
+
+.chat__conversazione{
+  height: calc(100% - 160px);
+  background: url("../img/mine.jpg");
+  padding: 30px 50px;
+}
+.conversazione__sent{justify-content: flex-end}
+.conversazione__received{justify-content: flex-start;}
+.conversazione__sent p,
+.conversazione__received p{ border-radius: 5px; padding: 15px; width: 40%; margin: 12px 0px;}
+.conversazione__sent p{background-color: #D5F9BA;}
+.conversazione__received p{background-color: white;}
+
+.chat__new{
+  height: 80px;
+  background-color: #F3EEEA;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat__new i{flex-basis: 10%; color: #6B7376; justify-content: center;}
+.chat__new input{flex-basis: 80%; line-height: 40px; padding: 0 20px; border: none; border-radius: 4px;}
+/* -------------------/CHAT------------------- */
+/* --------------------------------------/BoolZapp------------------------------------- */
+/* ----helpers----*/
+.tb{color: black;}
+.df{display: flex;}
+.db{display: block;}
+.dib{display: inline-block;}
+.overflow-effect{overflow:auto;}
+/* ----/helpers----*/
+/* ---------------------------------RESPONSIVE asseX------------------------------------- */
+@media (max-width:1028px) {
+  p{font-size: 12px;}
+  .user__notifiche .notifiche__link,
+  .user__notifiche i,
+  .user__ricerca span{display: none;}
+  .user__io .user__box2,
+  .chat__contatto .contatto__box2{flex-direction: column; justify-content: space-between;}
+  .user__box2 i,
+  .contatto__box2 i{font-size: 14px;}
+  .user__io{height: 110px;}
+  .user__notifiche,
+  .user__ricerca{height: 0px; padding: 0;}
+  .user__contatti{height: calc(100% - 110px);}
+}
+@media (max-width:692px) {
+  .user__io h4,
+  .user__contatti h4,
+  .fa-smile{display: none;}
+  .conversazione__sent p,
+  .conversazione__received p{width: 75%; padding: 1px 2px;;}
+  .chat__new input{flex-basis: 90%;}
+}
+/* ---------------------------------/RESPONSIVE asseX------------------------------------- */
