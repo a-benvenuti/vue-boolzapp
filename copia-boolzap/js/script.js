@@ -88,12 +88,12 @@ var app = new Vue(
               visible: true,
               messages: [{
                   date: '10/01/2020 15:30:55',
-                  message: 'Lo sai che ha aperto una nuova pizzeria?',
+                  message: 'Di a mamma che torno più tardi?',
                   status: 'sent'
               },
                   {
                       date: '10/01/2020 15:50:00',
-                      message: 'Si, ma preferirei andare al cinema',
+                      message: 'Ok',
                       status: 'received'
                   }
               ],
@@ -104,12 +104,12 @@ var app = new Vue(
               visible: true,
               messages: [{
                   date: '10/01/2020 15:30:55',
-                  message: 'Lo sai che ha aperto una nuova pizzeria?',
+                  message: 'Ricordati il regalo per Dario?',
                   status: 'sent'
               },
                   {
                       date: '10/01/2020 15:50:00',
-                      message: 'Si, ma preferirei andare al cinema',
+                      message: 'Ok, tranquillo.',
                       status: 'received'
                   }
               ],

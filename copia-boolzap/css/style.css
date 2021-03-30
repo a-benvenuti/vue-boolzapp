@@ -93,9 +93,11 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
 .conversazione__sent{justify-content: flex-end}
 .conversazione__received{justify-content: flex-start;}
 .conversazione__sent p,
-.conversazione__received p{ border-radius: 5px; padding: 15px; width: 40%; margin: 12px 0px;}
+.conversazione__received p{position: relative; border-radius: 5px; padding: 15px; width: 40%; margin: 12px 0px;}
 .conversazione__sent p{background-color: #D5F9BA;}
 .conversazione__received p{background-color: white;}
+.conversazione__sent span,
+.conversazione__received span{color:#B1B1B1; font-size: 10px; position: absolute; bottom: 0; right: 5px;}
 
 .chat__new{
   height: 80px;
@@ -128,13 +130,17 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
   .user__notifiche,
   .user__ricerca{height: 0px; padding: 0;}
   .user__contatti{height: calc(100% - 110px);}
+  .conversazione__sent span,
+  .conversazione__received span{color:#B1B1B1; font-size: 8px; position: absolute; bottom: 0; right: 5px;}
 }
 @media (max-width:692px) {
   .user__io h4,
   .user__contatti h4,
   .fa-smile{display: none;}
   .conversazione__sent p,
-  .conversazione__received p{width: 75%; padding: 1px 2px;;}
+  .conversazione__received p{width: 75%; padding: 1px 2px;}
   .chat__new input{flex-basis: 90%;}
+  .conversazione__sent span,
+  .conversazione__received span{display: none;}
 }
 /* ---------------------------------/RESPONSIVE asseX------------------------------------- */
