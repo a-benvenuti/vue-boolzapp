@@ -24,6 +24,7 @@
   <body>
     <div id="root">
       <div class="grid bool-wrapper">
+        <!-- col-USER -->
         <div class="col-user">
           <div class="user__io df">
             <div class="user__box1 df">
@@ -62,13 +63,16 @@
             </li>
           </ul>
         </div>
+        <!-- /col-USER -->
+
+        <!-- col-CHAT -->
         <div class="col-chat">
           <div class="chat__contatto df">
             <div class="contatto__box1 df">
               <img :src="'img/avatar' + contatti[currentContact].avatar + '.jpg'" alt="contact1" class="user-avatar">
               <div>
                 <h4 class="user-avatar">{{contatti[currentContact].name}}</h4>
-                <p class="xsmall-text">Ultimo accesso ieri</p>
+                <p class="xsmall-text">Ultimo accesso: {{contatti[currentContact].messages[0].date}}</p>
               </div>
             </div>
             <div class="contatto__box2 df">
@@ -84,11 +88,13 @@
           </div>
           <div class="chat__new df">
             <i class="far fa-smile df"></i>
-            <input class="small-text" type="text" placeholder="Scrivi un messaggio">
+            <input class="small-text" type="text" placeholder="Scrivi un messaggio" v-model="messageText" @keydown.13="newMessage(currentContact)">
             <i class="fas fa-microphone df"></i>
           </div>
         </div>
       </div>
+      <!-- /col-CHAT -->
+
     </div>
     <!-- script -->
     <script type="text/javascript" src="js/script.js"></script>

@@ -15,7 +15,6 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 0;
   overflow-y: hidden;
 }
 /* ----------------------------------------Mix---------------------------------------- */
@@ -26,17 +25,17 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
 .normal-text{font-size: 20px;}
 .small-text{font-size: 12px; font-weight: bold;}
 .xsmall-text{font-size: 10px; font-weight: bold;}
+.user-avatar{cursor: pointer;}
 /* ---------------------------------------/Mix---------------------------------------- */
 /* --------------------------------------BoolZapp------------------------------------- */
 /* ----------GRID-------- */
-.grid{display: flex; max-width: 1350px; height: 650px; padding: 0 20px; margin: 0 auto; z-index: 1;}
+.grid{display: flex; width: 100vw; height: 100vh; padding: 20px 50px; margin: 0 auto;}
 .grid .col-user{width: 35%; border-right: 2px solid grey;}
 .grid .col-chat{width: 65%;}
 /* ----------/GRID-------- */
+.col-user,
+.col-chat{height: 100%;}
 /* -------------------USER------------------- */
-.col-user{
-  height: 100%;
-}
 .user__io{
   height: 80px;
   padding: 10px;
@@ -75,9 +74,6 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
 /* -------------------/USER------------------- */
 
 /* -------------------CHAT------------------- */
-.col-chat{
-  height: 100%;
-}
 .chat__contatto{
   height: 80px;
   padding: 10px;
@@ -94,12 +90,14 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
   background: url("../img/mine.jpg");
   padding: 30px 50px;
 }
-.conversazione__sent,
-.conversazione__received{width: 100%; margin-top: 12px;}
-.conversazione__sent{justify-content: flex-end;}
+.conversazione__sent{justify-content: flex-end}
 .conversazione__received{justify-content: flex-start;}
-.conversazione__sent p{background-color: #D5F9BA; border-radius: 5px; padding: 15px; width: 40%;}
-.conversazione__received p{background-color: white; border-radius: 5px; padding: 15px; width: 40%;}
+.conversazione__sent p,
+.conversazione__received p{position: relative; border-radius: 5px; padding: 15px; width: 40%; margin: 12px 0px; overflow-wrap: break-word;}
+.conversazione__sent p{background-color: #D5F9BA;}
+.conversazione__received p{background-color: white;}
+.conversazione__sent span,
+.conversazione__received span{color:#B1B1B1; font-size: 10px; position: absolute; bottom: 0; right: 5px;}
 
 .chat__new{
   height: 80px;
@@ -118,7 +116,7 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
 .dib{display: inline-block;}
 .overflow-effect{overflow:auto;}
 /* ----/helpers----*/
-/* ---------------------------------RESPONSIVE asseX------------------------------------- */
+/* ---------------------------------RESPONSIVE------------------------------------- */
 @media (max-width:1028px) {
   p{font-size: 12px;}
   .user__notifiche .notifiche__link,
@@ -132,13 +130,17 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
   .user__notifiche,
   .user__ricerca{height: 0px; padding: 0;}
   .user__contatti{height: calc(100% - 110px);}
+  .conversazione__sent span,
+  .conversazione__received span{color:#B1B1B1; font-size: 8px; position: absolute; bottom: 0; right: 5px;}
 }
 @media (max-width:692px) {
   .user__io h4,
   .user__contatti h4,
   .fa-smile{display: none;}
   .conversazione__sent p,
-  .conversazione__received p{width: 70%; padding: 1px 2px;;}
+  .conversazione__received p{width: 75%; padding: 1px 2px;}
   .chat__new input{flex-basis: 90%;}
+  .conversazione__sent span,
+  .conversazione__received span{display: none;}
 }
-/* ---------------------------------/RESPONSIVE asseX------------------------------------- */
+/* ---------------------------------/RESPONSIVE------------------------------------- */

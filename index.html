@@ -21,17 +21,18 @@
     <!-- favicon -->
     <link rel="icon" type="image/png" href="https://img.icons8.com/bubbles/2x/whatsapp.png"/>
     <!-- /favicon -->
-    <title>Boolzapp</title>
+    <title>BoolZap</title>
   </head>
   <body>
-    <div id="root" class="">
+    <div id="root">
       <div class="grid bool-wrapper">
+        <!-- col-USER -->
         <div class="col-user">
           <div class="user__io df">
             <div class="user__box1 df">
-              <img src="img/avatar_7.jpg" alt="contact7">
+              <img src="img/avatar_7.jpg" alt="contact7" class="user-avatar">
               <div>
-                <h4 class="">Andrea</h4>
+                <h4 class="user-avatar">Andrea</h4>
               </div>
             </div>
             <div class="user__box2 df">
@@ -54,21 +55,26 @@
             </span>
           </div>
           <ul class="user__contatti overflow-effect" v-if="contatti.length > 0">
-            <li class="contatti__contatto df" v-for="(item, i) in contatti">
-              <img v-bind:src="'img/avatar' +  item.avatar + '.jpg'" alt="contact">
+            <li class="contatti__contatto df user-avatar" v-for="(item, index) in contatti"
+                :class="(index == currentContact ? 'contact-active' : null)"
+                @click="setIndexContact(index)">
+              <img :src="'img/avatar' +  item.avatar + '.jpg'" alt="contact">
               <div>
-                <h4 class="">{{item.name}}</h4>
+                <h4>{{item.name}}</h4>
               </div>
             </li>
           </ul>
         </div>
+        <!-- /col-USER -->
+
+        <!-- col-CHAT -->
         <div class="col-chat">
           <div class="chat__contatto df">
             <div class="contatto__box1 df">
-              <img src="img/avatar_1.jpg" alt="contact1">
+              <img :src="'img/avatar' + contatti[currentContact].avatar + '.jpg'" alt="contact1" class="user-avatar">
               <div>
-                <h4 class="">Michele</h4>
-                <p class="xsmall-text">Ultimo accesso ieri</p>
+                <h4 class="user-avatar">{{contatti[currentContact].name}}</h4>
+                <p class="xsmall-text">Ultimo accesso: {{contatti[currentContact].messages[0].date}}</p>
               </div>
             </div>
             <div class="contatto__box2 df">
@@ -78,23 +84,19 @@
             </div>
           </div>
           <div class="chat__conversazione overflow-effect">
-            <div class="conversazione__sent df">
-              <p class="tb">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            </div>
-            <div class="conversazione__received df">
-              <p class="tb">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            </div>
-            <div class="conversazione__received df">
-              <p class="tb">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <div v-for="item in contatti[currentContact].messages" class= "df" :class="item.status =='sent' ? 'conversazione__sent' : 'conversazione__received'">
+              <p class="tb">{{item.message}} <span>{{item.date}}</span> </p>
             </div>
           </div>
           <div class="chat__new df">
             <i class="far fa-smile df"></i>
-            <input class="small-text" type="text" placeholder="Scrivi un messaggio">
+            <input class="small-text" type="text" placeholder="Scrivi un messaggio" v-model="messageText" @keydown.13="newMessage(currentContact)">
             <i class="fas fa-microphone df"></i>
           </div>
         </div>
       </div>
+      <!-- /col-CHAT -->
+
     </div>
     <!-- script -->
     <script type="text/javascript" src="js/script.js"></script>

@@ -88,12 +88,12 @@ var app = new Vue(
               visible: true,
               messages: [{
                   date: '10/01/2020 15:30:55',
-                  message: 'Lo sai che ha aperto una nuova pizzeria?',
+                  message: 'Di a mamma che torno più tardi?',
                   status: 'sent'
               },
                   {
                       date: '10/01/2020 15:50:00',
-                      message: 'Si, ma preferirei andare al cinema',
+                      message: 'Ok',
                       status: 'received'
                   }
               ],
@@ -104,18 +104,51 @@ var app = new Vue(
               visible: true,
               messages: [{
                   date: '10/01/2020 15:30:55',
-                  message: 'Lo sai che ha aperto una nuova pizzeria?',
+                  message: 'Ricordati il regalo per Dario?',
                   status: 'sent'
               },
                   {
                       date: '10/01/2020 15:50:00',
-                      message: 'Si, ma preferirei andare al cinema',
+                      message: 'Ok, tranquillo.',
                       status: 'received'
                   }
               ],
           }
-      ]
+      ],
+      currentContact: 0,  //index contatto
+      messageText: "",    //campo vuoto messaggio
     },
-    methods: {}
+    methods: {
+      // funzione per impostare l'index del contatto cliccato
+      setIndexContact: function(position) {
+        this.currentContact = position;
+        return this.currentContact;
+      },
+      // funzione che inserisci messaggio scritto nell'array e da la risposta
+      newMessage: function(contact) {
+        const newSentMessage = {
+          date: '10/01/2020 15:50:00',
+          message: this.messageText,
+          status: 'sent'
+        };
+
+        if (this.messageText !== ""){
+          this.contatti[contact].messages.push(newSentMessage);
+          this.messageText = "";
+          setTimeout(()=>
+           {
+
+            const newReceivedMessage = {
+              date: '10/01/2020 15:50:01',
+              message: "Ok",
+              status: 'received'
+            };
+            this.contatti[contact].messages.push(newReceivedMessage);
+
+            },1000
+          );
+        }
+      }
+    }
   }
 );

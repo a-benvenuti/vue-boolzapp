@@ -93,7 +93,7 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
 .conversazione__sent{justify-content: flex-end}
 .conversazione__received{justify-content: flex-start;}
 .conversazione__sent p,
-.conversazione__received p{position: relative; border-radius: 5px; padding: 15px; width: 40%; margin: 12px 0px;}
+.conversazione__received p{position: relative; border-radius: 5px; padding: 15px; width: 40%; margin: 12px 0px; overflow-wrap: break-word;}
 .conversazione__sent p{background-color: #D5F9BA;}
 .conversazione__received p{background-color: white;}
 .conversazione__sent span,
@@ -116,7 +116,7 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
 .dib{display: inline-block;}
 .overflow-effect{overflow:auto;}
 /* ----/helpers----*/
-/* ---------------------------------RESPONSIVE asseX------------------------------------- */
+/* ---------------------------------RESPONSIVE------------------------------------- */
 @media (max-width:1028px) {
   p{font-size: 12px;}
   .user__notifiche .notifiche__link,
@@ -143,4 +143,4 @@ p{line-height: 18px; color: #666; font-weight: 500; font-size: 14px;}
   .conversazione__sent span,
   .conversazione__received span{display: none;}
 }
-/* ---------------------------------/RESPONSIVE asseX------------------------------------- */
+/* ---------------------------------/RESPONSIVE------------------------------------- */
