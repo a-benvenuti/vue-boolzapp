@@ -15,11 +15,17 @@
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- /VueJs -->
+    <!-- cdn dayjs -->
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <!-- /cdn dayjs -->
+    <!-- emojy picker -->
+    <script src="https://unpkg.com/vue-emoji-picker/dist/vue-emoji-picker.js"></script>
+    <!-- /emojy picker -->
     <!-- css -->
     <link rel="stylesheet" href="css/style.css">
     <!-- /css -->
 
-    <title>Copia</title>
+    <title>Copia / Prova</title>
   </head>
   <body>
     <div id="root">
@@ -53,9 +59,7 @@
             </span>
           </div>
           <ul class="user__contatti overflow-effect" v-if="contatti.length > 0">
-            <li class="contatti__contatto df user-avatar" v-for="(item, index) in contatti"
-                :class="(index == currentContact ? 'contact-active' : null)"
-                @click="setIndexContact(index)">
+            <li class="contatti__contatto df user-avatar" v-for="(item, index) in contatti" @click="setIndexContact(index), setIndexLast(index)">
               <img :src="'img/avatar' +  item.avatar + '.jpg'" alt="contact">
               <div>
                 <h4>{{item.name}}</h4>
@@ -72,7 +76,9 @@
               <img :src="'img/avatar' + contatti[currentContact].avatar + '.jpg'" alt="contact1" class="user-avatar">
               <div>
                 <h4 class="user-avatar">{{contatti[currentContact].name}}</h4>
-                <p class="xsmall-text">Ultimo accesso: {{contatti[currentContact].messages[0].date}}</p>
+                <div v-if="lastMessage >= 0">
+                  <p class="xsmall-text">Ultimo messaggio: {{contatti[currentContact].messages[lastMessage].date}}</p>
+                </div>
               </div>
             </div>
             <div class="contatto__box2 df">
@@ -82,12 +88,36 @@
             </div>
           </div>
           <div class="chat__conversazione overflow-effect">
-            <div v-for="item in contatti[currentContact].messages" class= "df" :class="item.status =='sent' ? 'conversazione__sent' : 'conversazione__received'">
-              <p class="tb">{{item.message}} <span>{{item.date}}</span> </p>
+            <div v-for="(item, index) in contatti[currentContact].messages" class= "df" :class="item.status =='sent' ? 'conversazione__sent' : 'conversazione__received'">
+              <p class="tb pr" @click="$event.target.classList.toggle('trash-active')" @mouseover="setIndexMessage(index)" @mouseleave="removeIndexMessage()">{{item.message}}
+                <span>{{item.date}}</span>
+                <i class="fas fa-trash-alt" @click="deleteMessage(currentContact, currentMessage)"></i>
+              </p>
             </div>
           </div>
           <div class="chat__new df">
-            <i class="far fa-smile df"></i>
+            <emoji-picker class="emoji" @emoji="insert" :search="search">
+              <div slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" @click.stop="clickEvent">
+                <i class="far fa-smile df"></i>
+              </div>
+              <div class="emojy__box overflow-effect" slot="emoji-picker" slot-scope="{ emojis, insert, display }">
+                <div>
+                  <div>
+                    <div v-for="(emojiGroup, category) in emojis" :key="category">
+                      <h5>{{ category }}</h5>
+                      <div>
+                        <span
+                          v-for="(emoji, emojiName) in emojiGroup"
+                          :key="emojiName"
+                          @click="insert(emoji)"
+                          :title="emojiName"
+                        >{{ emoji }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </emoji-picker>
             <input class="small-text" type="text" placeholder="Scrivi un messaggio" v-model="messageText" @keydown.13="newMessage(currentContact)">
             <i class="fas fa-microphone df"></i>
           </div>
