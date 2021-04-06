@@ -121,6 +121,12 @@ var app = new Vue(
       lastMessage: 0,         //index ultimo messaggio
       messageText: "",        //campo messaggio
     },
+    computed: {
+      getIndexLast: function() {
+        this.lastMessage = this.contatti[this.currentContact].messages.length - 1;
+        return this.lastMessage;
+      }
+    },
     methods: {
       // inserisce emoji in this.messageText
       insert(emoji) {
@@ -130,11 +136,6 @@ var app = new Vue(
       setIndexContact: function(index) {
         this.currentContact = index;
         return this.currentContact;
-      },
-      // funzione per 'ritornare' la lunghezza dell'array messages - 1, del contatto cliccato
-      setIndexLast: function(index) {
-        this.lastMessage = (this.contatti[index].messages.length) - 1;
-        return this.lastMessage;
       },
       // funzione invio messaggio e risposta
       newMessage: function(contact) {
@@ -162,19 +163,19 @@ var app = new Vue(
       },
       // funzione per 'catturare' l'index del messaggio al mouseenter
       setIndexMessage: function(index) {
-           this.currentMessage = index;
-           return this.currentMessage;
+        this.currentMessage = index;
+        return this.currentMessage;
        },
        // funzione per 'riazzerare' l'index del messaggio al mouseleave
       removeIndexMessage: function() {
-           this.currentMessage = null;
-           return this.currentMessage;
+        this.currentMessage = null;
+        return this.currentMessage;
        },
       // funzione per eliminare il messaggio e 'riaggiornare' l'ultimo messaggio
       deleteMessage: function(soggetto, index){
         this.contatti[soggetto].messages.splice(index, 1);
         this.lastMessage--;
-      }
+      },
     }
-  }
+ }
 );

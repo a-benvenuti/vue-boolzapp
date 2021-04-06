@@ -59,7 +59,7 @@
             </span>
           </div>
           <ul class="user__contatti overflow-effect" v-if="contatti.length > 0">
-            <li class="contatti__contatto df user-avatar" v-for="(item, index) in contatti" @click="setIndexContact(index), setIndexLast(index)">
+            <li class="contatti__contatto df user-avatar" v-for="(item, index) in contatti" @click="setIndexContact(index)">
               <img :src="'img/avatar' +  item.avatar + '.jpg'" alt="contact">
               <div>
                 <h4>{{item.name}}</h4>
@@ -77,7 +77,7 @@
               <div>
                 <h4 class="user-avatar">{{contatti[currentContact].name}}</h4>
                 <div v-if="lastMessage >= 0">
-                  <p class="xsmall-text">Ultimo messaggio: {{contatti[currentContact].messages[lastMessage].date}}</p>
+                  <p class="xsmall-text">Ultimo messaggio: {{contatti[currentContact].messages[getIndexLast].date}}</p>
                 </div>
               </div>
             </div>
