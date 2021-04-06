@@ -96,7 +96,7 @@
             </div>
           </div>
           <div class="chat__new df">
-            <emoji-picker class="emoji" @emoji="insert" :search="search">
+            <emoji-picker class="emoji" @emoji="insert">
               <div slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" @click.stop="clickEvent">
                 <i class="far fa-smile df"></i>
               </div>
