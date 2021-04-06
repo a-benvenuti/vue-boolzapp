@@ -55,11 +55,11 @@
           <div class="user__ricerca df">
             <span class="df">
               <i class="df fas fa-search"></i>
-              <input class="small-text" v-model="search" @keydown.enter="filteredContacts()" type="text" placeholder="Cerca o inizia una nuova chat">
+              <input class="small-text" v-model="search" @input="filteredContacts" type="text" placeholder="Cerca o inizia una nuova chat">
             </span>
           </div>
-          <ul class="user__contatti overflow-effect" v-if="filteredContacts.length > 0">
-            <li class="contatti__contatto df user-avatar" v-for="(item, index) in filteredContacts" @click="setIndexContact(index)">
+          <ul class="user__contatti overflow-effect" v-if="contatti.length > 0">
+            <li class="contatti__contatto df user-avatar" v-for="(item, index) in contatti" @click="setIndexContact(index)" v-show="item.visible">
               <img :src="'img/avatar' +  item.avatar + '.jpg'" alt="contact">
               <div>
                 <h4>{{item.name}}</h4>
@@ -73,11 +73,11 @@
         <div class="col-chat">
           <div class="chat__contatto df">
             <div class="contatto__box1 df">
-              <img :src="'img/avatar' + filteredContacts[currentContact].avatar + '.jpg'" alt="contact1" class="user-avatar">
+              <img :src="'img/avatar' + contatti[currentContact].avatar + '.jpg'" alt="contact1" class="user-avatar">
               <div>
-                <h4 class="user-avatar">{{filteredContacts[currentContact].name}}</h4>
+                <h4 class="user-avatar">{{contatti[currentContact].name}}</h4>
                 <div v-if="lastMessage >= 0">
-                  <p class="xsmall-text">Ultimo messaggio: {{filteredContacts[currentContact].messages[getIndexLast].date}}</p>
+                  <p class="xsmall-text">Ultimo messaggio: {{contatti[currentContact].messages[getIndexLast].date}}</p>
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@
             </div>
           </div>
           <div class="chat__conversazione overflow-effect">
-            <div v-for="(item, index) in filteredContacts[currentContact].messages" class= "df" :class="item.status =='sent' ? 'conversazione__sent' : 'conversazione__received'">
+            <div v-for="(item, index) in contatti[currentContact].messages" class= "df" :class="item.status =='sent' ? 'conversazione__sent' : 'conversazione__received'">
               <p class="tb pr" @click="$event.target.classList.toggle('trash-active')" @mouseover="setIndexMessage(index)" @mouseleave="removeIndexMessage()">{{item.message}}
                 <span>{{item.date}}</span>
                 <i class="fas fa-trash-alt" @click="deleteMessage(currentContact, currentMessage)"></i>

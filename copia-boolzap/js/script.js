@@ -121,7 +121,7 @@ var app = new Vue(
       currentMessage: null,   //index messaggio
       lastMessage: 0,         //index ultimo messaggio
       messageText: "",        //campo messaggio
-      search: "",
+      search: "",             //campo search in rubrica
     },
     // -------------------------------------------------------------------------
     methods: {
@@ -143,7 +143,7 @@ var app = new Vue(
         };
 
         if (this.messageText !== ""){
-          this.filteredContacts[contact].messages.push(newSentMessage);
+          this.contatti[contact].messages.push(newSentMessage);
           this.messageText = "";
           setTimeout(()=>
            {
@@ -152,7 +152,7 @@ var app = new Vue(
               message: "Ok",
               status: 'received'
             };
-            this.filteredContacts[contact].messages.push(newReceivedMessage);
+            this.contatti[contact].messages.push(newReceivedMessage);
 
             },1000
           );
@@ -170,25 +170,44 @@ var app = new Vue(
        },
       // funzione per eliminare il messaggio e 'riaggiornare' l'ultimo messaggio
       deleteMessage: function(soggetto, index){
-        this.filteredContacts[soggetto].messages.splice(index, 1);
+        this.contatti[soggetto].messages.splice(index, 1);
         this.lastMessage--;
+      },
+      // funzione filtro dei contatti in rubrica
+      filteredContacts: function() {
+        this.contatti.forEach((element) => {
+          if (this.search != "") {
+            if (element.name.toLocaleLowerCase().includes(this.search.toLowerCase())) {
+              element.visible = true;
+            } else {
+              element.visible = false;
+            }
+          } else {
+            element.visible = true;
+          }
+        });
       },
     },
     // -------------------------------------------------------------------------
     computed: {
       // funzione per 'catturare' l'indice dell'ultimo messaggio del contatto corrente
       getIndexLast: function() {
-        this.lastMessage = this.filteredContacts[this.currentContact].messages.length - 1;
+        this.lastMessage = this.contatti[this.currentContact].messages.length - 1;
         return this.lastMessage;
       },
-      // filtro dei contatti in rubrica
-      filteredContacts() {
-       return this.contatti.filter((element) =>
-          {
-            return element.name.toLocaleLowerCase().includes(this.search.toLowerCase());
-          }
-        );
-      },
+      /*
+      FILTRO DEI CONTATTI IN RUBRICA:
+       per utilizzare questo filtro devo cambiare
+       in 'this.filteredContacts' tutti i 'this.contatti'
+       sia in js che html.
+      */
+      // filteredContacts() {
+      //  return this.contatti.filter((element) =>
+      //     {
+      //       return element.name.toLocaleLowerCase().includes(this.search.toLowerCase());
+      //     }
+      //   );
+      // },
     },
     // -------------------------------------------------------------------------
   }
