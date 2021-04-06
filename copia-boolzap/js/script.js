@@ -2,6 +2,7 @@ Vue.use(EmojiPicker)
 var app = new Vue(
   {
     el: '#root',
+    // -------------------------------------------------------------------------
     data: {
       contatti: [
           {
@@ -120,13 +121,9 @@ var app = new Vue(
       currentMessage: null,   //index messaggio
       lastMessage: 0,         //index ultimo messaggio
       messageText: "",        //campo messaggio
+      search: "",
     },
-    computed: {
-      getIndexLast: function() {
-        this.lastMessage = this.contatti[this.currentContact].messages.length - 1;
-        return this.lastMessage;
-      }
-    },
+    // -------------------------------------------------------------------------
     methods: {
       // inserisce emoji in this.messageText
       insert(emoji) {
@@ -146,7 +143,7 @@ var app = new Vue(
         };
 
         if (this.messageText !== ""){
-          this.contatti[contact].messages.push(newSentMessage);
+          this.filteredContacts[contact].messages.push(newSentMessage);
           this.messageText = "";
           setTimeout(()=>
            {
@@ -155,7 +152,7 @@ var app = new Vue(
               message: "Ok",
               status: 'received'
             };
-            this.contatti[contact].messages.push(newReceivedMessage);
+            this.filteredContacts[contact].messages.push(newReceivedMessage);
 
             },1000
           );
@@ -173,9 +170,26 @@ var app = new Vue(
        },
       // funzione per eliminare il messaggio e 'riaggiornare' l'ultimo messaggio
       deleteMessage: function(soggetto, index){
-        this.contatti[soggetto].messages.splice(index, 1);
+        this.filteredContacts[soggetto].messages.splice(index, 1);
         this.lastMessage--;
       },
-    }
- }
+    },
+    // -------------------------------------------------------------------------
+    computed: {
+      // funzione per 'catturare' l'indice dell'ultimo messaggio del contatto corrente
+      getIndexLast: function() {
+        this.lastMessage = this.filteredContacts[this.currentContact].messages.length - 1;
+        return this.lastMessage;
+      },
+      // filtro dei contatti in rubrica
+      filteredContacts() {
+       return this.contatti.filter((element) =>
+          {
+            return element.name.toLocaleLowerCase().includes(this.search.toLowerCase());
+          }
+        );
+      },
+    },
+    // -------------------------------------------------------------------------
+  }
 );
