@@ -1,6 +1,8 @@
+Vue.use(EmojiPicker)
 var app = new Vue(
   {
     el: '#root',
+    // -------------------------------------------------------------------------
     data: {
       contatti: [
           {
@@ -8,17 +10,17 @@ var app = new Vue(
               avatar: '_1',
               visible: true,
               messages: [{
-                  date: '10/01/2020 15:30:55',
+                  date: '20/03/2021 15:30:55',
                   message: 'Hai portato a spasso il cane?',
                   status: 'sent'
-              },
+                  },
                   {
-                      date: '10/01/2020 15:50:00',
+                      date: '20/03/2021 15:50:00',
                       message: 'Ricordati di dargli da mangiare',
                       status: 'sent'
                   },
                   {
-                      date: '10/01/2020 16:15:22',
+                      date: '20/03/2021 16:15:22',
                       message: 'Tutto fatto!',
                       status: 'received'
                   }
@@ -29,17 +31,17 @@ var app = new Vue(
               avatar: '_2',
               visible: true,
               messages: [{
-                  date: '20/03/2020 16:30:00',
+                  date: '18/03/2021 16:30:00',
                   message: 'Ciao come stai?',
                   status: 'sent'
-              },
+                  },
                   {
-                      date: '20/03/2020 16:30:55',
+                      date: '18/03/2021 16:30:55',
                       message: 'Bene grazie! Stasera ci vediamo?',
                       status: 'received'
                   },
                   {
-                      date: '20/03/2020 16:35:00',
+                      date: '18/03/2021 16:35:00',
                       message: 'Mi piacerebbe ma devo andare a fare la spesa.',
                       status: 'received'
                   }
@@ -50,17 +52,17 @@ var app = new Vue(
               avatar: '_3',
               visible: true,
               messages: [{
-                  date: '28/03/2020 10:10:40',
+                  date: '17/03/2021 10:10:40',
                   message: 'La Marianna va in campagna',
                   status: 'received'
-              },
+                  },
                   {
-                      date: '28/03/2020 10:20:10',
+                      date: '17/03/2021 10:20:10',
                       message: 'Sicuro di non aver sbagliato chat?',
                       status: 'sent'
                   },
                   {
-                      date: '28/03/2020 16:15:22',
+                      date: '17/03/2021 12:15:22',
                       message: 'Ah scusa!',
                       status: 'received'
                   }
@@ -71,12 +73,12 @@ var app = new Vue(
               avatar: '_4',
               visible: true,
               messages: [{
-                  date: '10/01/2020 15:30:55',
+                  date: '16/03/2021 18:30:55',
                   message: 'Lo sai che ha aperto una nuova pizzeria?',
                   status: 'sent'
-              },
+                  },
                   {
-                      date: '10/01/2020 15:50:00',
+                      date: '16/03/2020 18:50:00',
                       message: 'Si, ma preferirei andare al cinema',
                       status: 'received'
                   }
@@ -87,12 +89,12 @@ var app = new Vue(
               avatar: '_5',
               visible: true,
               messages: [{
-                  date: '10/01/2020 15:30:55',
+                  date: '10/03/2021 20:30:55',
                   message: 'Di a mamma che torno più tardi?',
                   status: 'sent'
-              },
+                  },
                   {
-                      date: '10/01/2020 15:50:00',
+                      date: '10/03/2021 20:50:00',
                       message: 'Ok',
                       status: 'received'
                   }
@@ -103,31 +105,39 @@ var app = new Vue(
               avatar: '_6',
               visible: true,
               messages: [{
-                  date: '10/01/2020 15:30:55',
+                  date: '01/02/2021 21:30:55',
                   message: 'Ricordati il regalo per Dario?',
                   status: 'sent'
-              },
+                  },
                   {
-                      date: '10/01/2020 15:50:00',
+                      date: '01/02/2021 21:50:00',
                       message: 'Ok, tranquillo.',
                       status: 'received'
                   }
               ],
           }
       ],
-      currentContact: 0,  //index contatto
-      messageText: "",    //campo messaggio
+      currentContact: 0,      //index contatto
+      currentMessage: null,   //index messaggio
+      lastMessage: 0,         //index ultimo messaggio
+      messageText: "",        //campo messaggio
+      search: "",             //campo search in rubrica
     },
+    // -------------------------------------------------------------------------
     methods: {
+      // inserisce emoji in this.messageText
+      insert(emoji) {
+        this.messageText += emoji
+      },
       // funzione per 'catturare' l'index del contatto cliccato
-      setIndexContact: function(position) {
-        this.currentContact = position;
+      setIndexContact: function(index) {
+        this.currentContact = index;
         return this.currentContact;
       },
       // funzione invio messaggio e risposta
       newMessage: function(contact) {
         const newSentMessage = {
-          date: '10/01/2020 15:50:00',
+          date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
           message: this.messageText,
           status: 'sent'
         };
@@ -137,9 +147,8 @@ var app = new Vue(
           this.messageText = "";
           setTimeout(()=>
            {
-
             const newReceivedMessage = {
-              date: '10/01/2020 15:50:01',
+              date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
               message: "Ok",
               status: 'received'
             };
@@ -148,7 +157,58 @@ var app = new Vue(
             },1000
           );
         }
-      }
-    }
+      },
+      // funzione per 'catturare' l'index del messaggio al mouseenter
+      setIndexMessage: function(index) {
+        this.currentMessage = index;
+        return this.currentMessage;
+       },
+       // funzione per 'riazzerare' l'index del messaggio al mouseleave
+      removeIndexMessage: function() {
+        this.currentMessage = null;
+        return this.currentMessage;
+       },
+      // funzione per eliminare il messaggio e 'riaggiornare' l'ultimo messaggio
+      deleteMessage: function(soggetto, index){
+        this.contatti[soggetto].messages.splice(index, 1);
+        this.lastMessage--;
+      },
+      // funzione filtro dei contatti in rubrica
+      filteredContacts: function() {
+        this.contatti.forEach((element) => {
+          if (this.search != "") {
+            if (element.name.toLocaleLowerCase().includes(this.search.toLowerCase())) {
+              element.visible = true;
+            } else {
+              element.visible = false;
+            }
+          } else {
+            element.visible = true;
+          }
+        });
+      },
+    },
+    // -------------------------------------------------------------------------
+    computed: {
+      // funzione per 'catturare' l'indice dell'ultimo messaggio del contatto corrente
+      getIndexLast: function() {
+        this.lastMessage = this.contatti[this.currentContact].messages.length - 1;
+        return this.lastMessage;
+      },
+      /*
+      FILTRO DEI CONTATTI IN RUBRICA:
+       per utilizzare questo filtro devo cambiare
+       in 'this.filteredContacts' tutti i 'this.contatti'
+       sia in js che html.
+      */
+      // filteredContacts() {
+      //  return this.contatti.filter((element) =>
+      //     {
+      //       return element.name.toLocaleLowerCase().includes(this.search.toLowerCase());
+      //     }
+      //   );
+      // },
+    },
+    // -------------------------------------------------------------------------
   }
 );
